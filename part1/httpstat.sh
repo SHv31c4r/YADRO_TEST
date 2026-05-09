@@ -4,8 +4,8 @@ CODELIST=(200 201 301 404 500)
 
 for CODE in "${CODELIST[@]}" 
 do
-	STATUS=$(curl -o tmpBody -s -w "%{http_code}"  https://httpbin.org/status/$CODE)
-	echo "Trying URL: https://httpbin.org/status/$CODE"
+	STATUS=$(curl -o tmpBody -s -w "%{http_code}"  https://httpstat.us/$CODE)
+	echo "Trying URL: https://httpstat.us/$CODE"
 	if [ "$STATUS" -ge 400 ] 
 	then
 		echo "Exception: recieved status $STATUS" >&2
