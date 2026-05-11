@@ -24,11 +24,13 @@ do
 	FULLPATH="$LINK/$CODE"
 	echo "Trying URL: $FULLPATH"
 	STATUS=$(curl -A "Mozilla/5.0" -o $TMPFILE -s -w "%{http_code}"  $FULLPATH)
+	{
 	if [[ "$STATUS" -ge 400 || "$STATUS" -eq 0 ]] 
 	then
-		echo "EXCEPTION: recieved status $STATUS ($(cat $TMPFILE))" >&2
+		echo "EXCEPTION: recieved status $STATUS ($(cat $TMPFILE))"
 	else
 		echo "$STATUS: $(cat $TMPFILE)	$(date +%d.%m.%y-%H:%M:%S)"
 	fi
+	} >&1
 done
 rm "$TMPFILE"
