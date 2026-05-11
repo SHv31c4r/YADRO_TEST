@@ -1,0 +1,7 @@
+- name: Clear copied files from dir
+  ansible.builtin.file:
+    path: "{{ playbook_dir }}/{{ item }}"
+    state: absent
+  loop:
+    - Dockerfile
+    - httpstat.sh

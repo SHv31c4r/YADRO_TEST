@@ -1,0 +1,11 @@
+---
+- name: Download docker and exec script
+  hosts: localhost
+  connection: local
+  become: yes
+  
+  roles:
+    - dockerInstall
+    - containerWork
+    - checkLogs
+    - cleaner

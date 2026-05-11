@@ -1,0 +1,14 @@
+- name: Check script status
+  ansible.builtin.assert:
+    that:
+      - containerResult.container.State.ExitCode == 0
+    success_msg: "Script completed successfully (0)"
+    fail_msg: "Script failed. Exit code: {{ containerResult.container.State.ExitCode }}"
+
+- name: Grab logs from docker container
+  ansible.builtin.shell: docker logs ansible-test-container 2>&1
+  register: logsFromContainer
+  
+- name: Print Logs
+  ansible.builtin.debug:
+    var: logsFromContainer.stdout_lines

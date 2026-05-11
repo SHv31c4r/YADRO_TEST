@@ -1,0 +1,29 @@
+- name: Copy Dockerfile & script
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/../part2/{{ item }}"
+    dest: "{{ playbook_dir }}"
+  loop:
+    - Dockerfile
+    - httpstat.sh
+
+- name: Docker build
+  community.docker.docker_image:
+    name: ubuntu-builded-by-ansible
+    build:
+      path: "{{ playbook_dir }}"
+    source: build
+
+- name: Remove container if exists
+  community.docker.docker_container:
+    name: ansible-test-container
+    state: absent
+
+- name: Docker run
+  community.docker.docker_container:
+    name: ansible-test-container
+    image: ubuntu-builded-by-ansible
+    detach: false
+    cleanup: false
+    state: started
+  register: containerResult
+  ignore_errors: yes

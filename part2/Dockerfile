@@ -7,4 +7,6 @@ RUN apt-get update -y && apt-get install curl=7.81.0-1ubuntu1.24 -y && \
 
 COPY httpstat.sh /app/
 
+RUN chmod +x httpstat.sh
+
 CMD ["./httpstat.sh", "auto"]
