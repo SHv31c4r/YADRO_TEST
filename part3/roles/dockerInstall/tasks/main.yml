@@ -3,19 +3,21 @@
     name: [docker-ce, docker-ce-cli, containerd.io, python3-docker]
     state: present
     update_cache: yes
+  become: yes
     
 - name: Adding current user in docker group
   ansible.builtin.user:
     name: "{{ ansible_facts['user_id'] }}"
     groups: docker
     append: yes
-
+  become: yes
+  
 - name: Check docker-service status
   ansible.builtin.systemd_service:
     name: docker
     state: started
     enabled: yes
-
+  
 - name: Check docker downloaded successfully
   ansible.builtin.shell: docker --version
   changed_when: false

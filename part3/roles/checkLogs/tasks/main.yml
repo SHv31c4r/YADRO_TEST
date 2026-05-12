@@ -6,7 +6,7 @@
     fail_msg: "Script failed. Exit code: {{ containerResult.container.State.ExitCode }}"
 
 - name: Grab logs from docker container
-  ansible.builtin.shell: docker logs ansible-test-container 2>&1
+  ansible.builtin.shell: docker logs ansible-test-container
   register: logsFromContainer
   
 - name: Print Logs

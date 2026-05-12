@@ -5,7 +5,7 @@ WORKDIR /app
 RUN apt-get update -y && apt-get install curl=7.81.0-1ubuntu1.24 -y && \
 	apt-get clean && rm -rf /var/lib/apt/lists/*
 
-COPY httpstat.sh /app/
+COPY httpstat.sh .
 
 RUN chmod +x httpstat.sh
 
